@@ -48,4 +48,12 @@ class Product extends Model
     {
         return number_format($this->price).' บาท';
     }
+
+    public function imageUrl(): string
+    {
+        $absolute = public_path($this->image);
+        $version = is_file($absolute) ? filemtime($absolute) : null;
+
+        return asset($this->image).($version ? '?v='.$version : '');
+    }
 }

@@ -3,39 +3,25 @@
 @section('title', 'TKX')
 
 @section('content')
-    <section class="hero">
-        <div class="hero-copy">
-            <p class="eyebrow">White wardrobe</p>
+    <section class="billboard">
+        <img src="{{ asset('images/hero.jpg') }}?v={{ filemtime(public_path('images/hero.jpg')) }}" alt="ภาพจากคอลเลกชัน TKX">
+        <div class="billboard-copy">
+            <p>New arrival</p>
             <h1>เสื้อผ้าและกางเกง<br>โทนขาว</h1>
-            <p class="lede">คอลเลกชันผ้าลินินและคอตตอนสีขาว ครีม และเบจ ตัดเย็บเรียบ ใส่ซ้ำได้ทุกวันโดยไม่ต้องมีลาย</p>
-            <a class="text-link" href="{{ route('shop.index') }}">ดูสินค้าทั้งหมด</a>
-        </div>
-        <div class="hero-media">
-            <img src="{{ asset('images/hero.jpg') }}?v={{ filemtime(public_path('images/hero.jpg')) }}" alt="ภาพจากคอลเลกชัน TKX">
+            <a class="buy-now" href="{{ route('shop.index') }}">ดูสินค้า</a>
         </div>
     </section>
 
-    <section class="section">
-        <div class="section-heading">
-            <p class="eyebrow">หมวดหมู่</p>
-            <h2>เลือกจากเสื้อหรือกางเกง</h2>
-        </div>
-        <div class="category-grid">
-            @foreach ($categories as $category)
-                <a class="category-tile" href="{{ route('shop.index', ['category' => $category->slug]) }}">
-                    <span class="eyebrow">{{ $category->subtitle }}</span>
-                    <h3>{{ $category->name }}</h3>
-                    <p>{{ $category->description }}</p>
-                    <span class="text-link">{{ $category->products_count }} ชิ้น</span>
-                </a>
-            @endforeach
-        </div>
+    <section class="campaign">
+        <p class="eyebrow">White wardrobe</p>
+        <h2>เสื้อผ้าและกางเกงโทนขาว</h2>
+        <p class="lede">คอลเลกชันผ้าลินินและคอตตอนสีขาว ครีม และเบจ ตัดเย็บเรียบ ใส่ซ้ำได้ทุกวันโดยไม่ต้องมีลาย</p>
     </section>
 
-    <section class="section">
-        <div class="section-heading">
-            <p class="eyebrow">แนะนำ</p>
-            <h2>ชิ้นที่ใส่บ่อยในคอลเลกชันนี้</h2>
+    <section class="shelf" id="new">
+        <div class="shelf-head">
+            <h2>สินค้าใหม่</h2>
+            <a href="{{ route('shop.index') }}">ดูทั้งหมด</a>
         </div>
         <div class="product-grid">
             @foreach ($featured as $featuredProduct)
@@ -43,4 +29,55 @@
             @endforeach
         </div>
     </section>
+
+    <section class="articles" id="articles">
+        <div class="articles-head">
+            <h2>บทความ</h2>
+        </div>
+        <div class="article-grid">
+            @foreach ($articles as $article)
+                <article class="article-card">
+                    <a href="{{ route('articles.show', $article) }}">
+                        <img src="{{ $article->imageUrl() }}" alt="">
+                        <h3>{{ $article->title }}</h3>
+                    </a>
+                    <p>{{ $article->excerpt }}</p>
+                    <a class="read-more" href="{{ route('articles.show', $article) }}">อ่านต่อ</a>
+                </article>
+            @endforeach
+        </div>
+    </section>
+
+    <section class="banner-row">
+        @foreach ($categories as $category)
+            @php $cover = $grouped->get($category->id, collect())->first(); @endphp
+            <a class="banner" href="{{ route('shop.index', ['category' => $category->slug]) }}">
+                @if ($cover)
+                    <img src="{{ $cover->imageUrl() }}" alt="">
+                @endif
+                <span>
+                    <small>{{ $category->subtitle }}</small>
+                    <strong>{{ $category->name }}</strong>
+                    ดูสินค้า
+                </span>
+            </a>
+        @endforeach
+    </section>
+
+    @foreach ($categories as $category)
+        @php $items = $grouped->get($category->id, collect())->take(4); @endphp
+        @if ($items->isNotEmpty())
+            <section class="shelf">
+                <div class="shelf-head">
+                    <h2>{{ $category->name }}</h2>
+                    <a href="{{ route('shop.index', ['category' => $category->slug]) }}">ดูทั้งหมด</a>
+                </div>
+                <div class="product-grid">
+                    @foreach ($items as $item)
+                        @include('partials.product-card', ['product' => $item])
+                    @endforeach
+                </div>
+            </section>
+        @endif
+    @endforeach
 @endsection

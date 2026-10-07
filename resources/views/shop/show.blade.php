@@ -5,7 +5,7 @@
 @section('content')
     <article class="product-detail">
         <div class="product-detail-media">
-            <img src="{{ asset($product->image) }}?v={{ filemtime(public_path($product->image)) }}" alt="{{ $product->name }}">
+            <img src="{{ $product->imageUrl() }}" alt="{{ $product->name }}">
         </div>
         <div class="product-detail-copy">
             <p class="breadcrumb">

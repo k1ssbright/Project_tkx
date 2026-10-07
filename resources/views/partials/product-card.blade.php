@@ -1,6 +1,6 @@
 <a class="product-card" href="{{ route('products.show', $product) }}">
     <div class="product-media">
-        <img src="{{ asset($product->image) }}?v={{ filemtime(public_path($product->image)) }}" alt="{{ $product->name }}">
+        <img src="{{ $product->imageUrl() }}" alt="{{ $product->name }}">
     </div>
     <div class="product-meta">
         <span>{{ $product->category->name }}</span>

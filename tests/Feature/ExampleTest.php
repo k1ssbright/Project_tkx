@@ -16,7 +16,14 @@ class ExampleTest extends TestCase
         $this->get('/')
             ->assertOk()
             ->assertSee('เสื้อผ้าและกางเกง')
-            ->assertSee('เสื้อเชิ้ตลินินสีงาช้าง');
+            ->assertSee('เสื้อเชิ้ตลินินสีงาช้าง')
+            ->assertSee('ใส่โทนขาวทั้งชุดโดยไม่ดูจืด')
+            ->assertSee('อ่านต่อ');
+
+        $this->get('/articles/linen-or-cotton')
+            ->assertOk()
+            ->assertSee('ลินินกับคอตตอน เลือกยังไง')
+            ->assertSee('เสื้อเชิ้ตลินินเหมาะกับวันที่อยู่กลางแจ้ง');
 
         $this->get('/shop?category=pants')
             ->assertOk()

@@ -8,21 +8,28 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Noto+Sans+Thai:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="{{ asset('favicon.ico') }}?v={{ filemtime(public_path('favicon.ico')) }}" sizes="32x32">
+    <link rel="icon" type="image/png" href="{{ asset('images/favicon-256.png') }}?v={{ filemtime(public_path('images/favicon-256.png')) }}">
+    <link rel="apple-touch-icon" href="{{ asset('images/apple-touch-icon.png') }}">
     <link rel="stylesheet" href="{{ asset('css/catalog.css') }}">
 </head>
 <body>
     <header class="site-header">
-        <div class="header-inner">
+        <p class="announce">เว็บนี้สำหรับโชว์สินค้า สอบถามไซส์และสต็อกได้ที่ร้าน</p>
+        <div class="header-bar">
+            <details class="menu">
+                <summary aria-label="เปิดเมนู"><span></span><span></span><span></span></summary>
+                <nav class="menu-panel" aria-label="เมนู">
+                    @include('partials.nav-links')
+                </nav>
+            </details>
             <a class="logo" href="{{ route('home') }}">
                 <img src="{{ asset('images/nanocircuit-logo.png') }}" alt="Nano Circuit">
             </a>
             <nav class="site-nav" aria-label="หลัก">
-            <a href="{{ route('home') }}" @class(['is-active' => request()->routeIs('home')])>หน้าแรก</a>
-            <a href="{{ route('shop.index') }}" @class(['is-active' => request()->routeIs('shop.index') && ! request()->filled('category')])>สินค้าทั้งหมด</a>
-            <a href="{{ route('shop.index', ['category' => 'shirts']) }}" @class(['is-active' => request('category') === 'shirts' || (request()->routeIs('products.show') && $product->category->slug === 'shirts')])>เสื้อ</a>
-            <a href="{{ route('shop.index', ['category' => 'pants']) }}" @class(['is-active' => request('category') === 'pants' || (request()->routeIs('products.show') && $product->category->slug === 'pants')])>กางเกง</a>
-            <a href="{{ route('about') }}" @class(['is-active' => request()->routeIs('about')])>เกี่ยวกับเรา</a>
+                @include('partials.nav-links')
             </nav>
+            <a class="header-action" href="{{ route('shop.index') }}">สินค้า</a>
         </div>
     </header>
 
@@ -31,20 +38,31 @@
     </main>
 
     <footer class="site-footer">
-        <div class="footer-inner">
+        <div class="footer-grid">
             <div>
                 <a class="logo" href="{{ route('home') }}">
                     <img src="{{ asset('images/nanocircuit-logo.png') }}" alt="Nano Circuit">
                 </a>
                 <p>เสื้อผ้าและกางเกงโทนขาว สำหรับคนที่ชอบลุคเรียบ</p>
             </div>
-            <div class="footer-links">
+            <div>
+                <h2>ร้าน</h2>
+                <a href="{{ route('shop.index') }}">สินค้าใหม่</a>
                 <a href="{{ route('shop.index', ['category' => 'shirts']) }}">เสื้อ</a>
                 <a href="{{ route('shop.index', ['category' => 'pants']) }}">กางเกง</a>
-                <a href="{{ route('about') }}">เกี่ยวกับเรา</a>
             </div>
-            <p class="footer-note">เว็บนี้สำหรับโชว์สินค้า สอบถามไซส์และสต็อกได้ที่ร้าน</p>
+            <div>
+                <h2>ข้อมูล</h2>
+                <a href="{{ route('about') }}">เกี่ยวกับเรา</a>
+                <a href="{{ route('products.manage.index') }}">จัดการสินค้า</a>
+            </div>
+            <div>
+                <h2>ติดต่อ</h2>
+                <p>โชว์รูมนัดหมายล่วงหน้า</p>
+                <a href="mailto:hello@tkx.local">hello@tkx.local</a>
+            </div>
         </div>
+        <p class="footer-note">© TKX</p>
     </footer>
 </body>
 </html>
