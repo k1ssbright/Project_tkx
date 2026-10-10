@@ -15,7 +15,6 @@
 </head>
 <body>
     <header class="site-header">
-        <p class="announce">เว็บนี้สำหรับโชว์สินค้า สอบถามไซส์และสต็อกได้ที่ร้าน</p>
         <div class="header-bar">
             <details class="menu">
                 <summary aria-label="เปิดเมนู"><span></span><span></span><span></span></summary>
@@ -29,7 +28,6 @@
             <nav class="site-nav" aria-label="หลัก">
                 @include('partials.nav-links')
             </nav>
-            <a class="header-action" href="{{ route('shop.index') }}">สินค้า</a>
         </div>
     </header>
 
@@ -54,12 +52,7 @@
             <div>
                 <h2>ข้อมูล</h2>
                 <a href="{{ route('about') }}">เกี่ยวกับเรา</a>
-                <a href="{{ route('products.manage.index') }}">จัดการสินค้า</a>
-            </div>
-            <div>
-                <h2>ติดต่อ</h2>
-                <p>โชว์รูมนัดหมายล่วงหน้า</p>
-                <a href="mailto:hello@tkx.local">hello@tkx.local</a>
+                <a href="{{ route('home') }}#articles">บทความ</a>
             </div>
         </div>
         <p class="footer-note">© TKX</p>

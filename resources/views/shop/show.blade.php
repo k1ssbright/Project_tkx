@@ -41,7 +41,7 @@
                 </div>
             </dl>
 
-            <p class="notice">หน้านี้สำหรับโชว์สินค้า สอบถามไซส์และจำนวนที่มีได้ที่ร้าน</p>
+            <p class="notice">หน้านี้สำหรับดูรายละเอียดสินค้า ไม่มีตะกร้าและไม่รับสั่งซื้อ</p>
 
             @if ($product->category->slug === 'shirts')
                 @include('partials.shirt-size-chart')

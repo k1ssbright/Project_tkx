@@ -53,24 +53,19 @@ img {
     background: var(--header);
 }
 
-.announce {
-    margin: 0;
-    padding: 8px 16px;
-    background: #111111;
-    color: #ffffff;
-    font-size: 12px;
-    letter-spacing: 0.04em;
-    text-align: center;
-}
-
 .header-bar {
     display: grid;
-    grid-template-areas: "menu logo action";
-    grid-template-columns: auto 1fr auto;
+    grid-template-areas: "menu logo balance";
+    grid-template-columns: 40px 1fr 40px;
     align-items: center;
     gap: 12px;
     min-height: 68px;
     padding: 8px 16px;
+}
+
+.header-bar::after {
+    content: "";
+    grid-area: balance;
 }
 
 .logo {
@@ -124,8 +119,7 @@ img {
 }
 
 .menu-panel a,
-.site-nav a,
-.header-action {
+.site-nav a {
     color: #ffffff;
     white-space: nowrap;
 }
@@ -137,21 +131,12 @@ img {
 .menu-panel a.is-active,
 .menu-panel a:hover,
 .site-nav a.is-active,
-.site-nav a:hover,
-.header-action:hover {
+.site-nav a:hover {
     color: var(--accent);
 }
 
 .site-nav {
     display: none;
-}
-
-.header-action {
-    grid-area: action;
-    justify-self: end;
-    font-size: 14px;
-    font-weight: 600;
-    letter-spacing: 0.08em;
 }
 
 .billboard {
@@ -716,7 +701,7 @@ h2 {
 
 .footer-grid {
     display: grid;
-    grid-template-columns: 1.4fr 0.8fr 0.8fr 1fr;
+    grid-template-columns: 1.4fr 0.8fr 0.8fr;
     gap: 28px;
     width: min(1120px, calc(100% - 40px));
     margin-inline: auto;
@@ -1079,10 +1064,15 @@ h2 {
     }
 
     .header-bar {
-        grid-template-areas: "logo nav action";
+        grid-template-areas: "logo nav";
+        grid-template-columns: auto 1fr;
         width: min(1120px, calc(100% - 40px));
         margin-inline: auto;
         padding-inline: 0;
+    }
+
+    .header-bar::after {
+        display: none;
     }
 
     .logo {
