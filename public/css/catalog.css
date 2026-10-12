@@ -975,8 +975,14 @@ h2 {
     border: 1px solid var(--line);
     background: var(--paper);
     color: var(--ink);
-    font: inherit;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
     padding: 12px;
+}
+
+.field select {
+    line-height: normal;
 }
 
 .field textarea {
