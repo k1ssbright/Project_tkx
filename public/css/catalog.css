@@ -53,6 +53,11 @@ img {
     background: var(--header);
 }
 
+#articles,
+#office {
+    scroll-margin-top: 84px;
+}
+
 .header-bar {
     display: grid;
     grid-template-areas: "menu logo balance";
@@ -1149,5 +1154,200 @@ h2 {
 
     h1 {
         font-size: 46px;
+    }
+}
+
+.venue-hero {
+    position: relative;
+    display: grid;
+    align-items: center;
+    min-height: 420px;
+    overflow: hidden;
+    color: #ffffff;
+}
+
+.venue-hero img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 72% center;
+}
+
+.venue-hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.72) 0%, rgba(0, 0, 0, 0.28) 52%, rgba(0, 0, 0, 0.05) 100%);
+}
+
+.venue-hero-copy {
+    position: relative;
+    z-index: 1;
+    width: min(1120px, calc(100% - 48px));
+    margin-inline: auto;
+    padding: 48px 0;
+}
+
+.venue-hero-copy p {
+    margin: 0 0 8px;
+    color: var(--accent);
+    font-family: var(--serif);
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.42em;
+    text-transform: uppercase;
+}
+
+.venue-hero h1 {
+    color: #ffffff;
+    font-size: clamp(56px, 8vw, 92px);
+}
+
+.venue-intro,
+.venue-story,
+.venue-facility,
+.venue-portfolio {
+    width: min(920px, calc(100% - 40px));
+    margin-inline: auto;
+    padding: 64px 0 12px;
+    text-align: center;
+}
+
+.venue-intro > img,
+.venue-story > img,
+.portfolio-grid img {
+    width: 100%;
+    height: auto;
+    margin-bottom: 28px;
+}
+
+.venue-intro h2,
+.venue-story h2,
+.venue-facility h2,
+.venue-portfolio h2,
+.venue-experience h2 {
+    margin-bottom: 18px;
+}
+
+.venue-intro p,
+.venue-story p {
+    max-width: 760px;
+    margin: 0 auto 14px;
+    color: #6d6d6d;
+    font-size: 17px;
+    font-weight: 300;
+    line-height: 1.8;
+}
+
+.venue-intro .eyebrow,
+.venue-story .eyebrow,
+.venue-facility .eyebrow,
+.venue-portfolio .eyebrow {
+    margin-bottom: 8px;
+}
+
+.venue-experience {
+    margin-top: 56px;
+    padding: 72px 0 64px;
+    background: #000000;
+    color: #ffffff;
+    text-align: center;
+}
+
+.venue-experience .eyebrow {
+    color: var(--accent);
+}
+
+.venue-experience h2 {
+    color: #ffffff;
+}
+
+.venue-gallery {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    width: min(920px, calc(100% - 40px));
+    margin: 36px auto 0;
+}
+
+.venue-gallery img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 3 / 2;
+}
+
+.venue-story img {
+    margin-top: 28px;
+}
+
+.facility-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 36px 28px;
+    margin-top: 36px;
+    text-align: center;
+}
+
+.facility-grid svg {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 14px;
+}
+
+.facility-grid h3,
+.portfolio-grid h3 {
+    margin: 0 0 8px;
+    font-family: var(--serif);
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.facility-grid p {
+    margin: 0;
+    color: #6d6d6d;
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 1.7;
+}
+
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+    margin-top: 28px;
+    text-align: left;
+}
+
+.portfolio-grid img {
+    aspect-ratio: 4 / 3;
+    margin-bottom: 14px;
+}
+
+.portfolio-grid time {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--muted);
+    font-size: 13px;
+}
+
+@media (min-width: 901px) {
+    .facility-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media (max-width: 700px) {
+    .venue-hero {
+        min-height: 280px;
+    }
+
+    .venue-gallery,
+    .facility-grid,
+    .portfolio-grid {
+        grid-template-columns: 1fr;
     }
 }

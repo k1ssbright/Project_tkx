@@ -44,7 +44,9 @@ class ExampleTest extends TestCase
         $this->get('/about')
             ->assertOk()
             ->assertSee('เกี่ยวกับเรา')
-            ->assertSee('ตารางไซส์เสื้อ');
+            ->assertSee('900 เมตร')
+            ->assertSee('Our Facility')
+            ->assertSee('0612324516');
 
         $this->get('/shop?category=missing')->assertNotFound();
     }
