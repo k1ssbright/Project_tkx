@@ -19,11 +19,14 @@ class ProductManagementTest extends TestCase
         $this->get('/manage/products')
             ->assertOk()
             ->assertSee('จัดการสินค้า')
-            ->assertSee('เสื้อเชิ้ตลินินสีงาช้าง');
+            ->assertSee('เสื้อเชิ้ตลินินสีงาช้าง')
+            ->assertSee('sweetalert2@11', false)
+            ->assertSee('data-confirm="ลบสินค้านี้ใช่ไหม"', false)
+            ->assertDontSee('return confirm(', false);
 
         $categoryId = Category::query()->where('slug', 'shirts')->value('id');
 
-        $this->post('/manage/products', [
+        $response = $this->post('/manage/products', [
             'name' => 'เสื้อทดสอบ',
             'category_id' => $categoryId,
             'price' => 990,
@@ -33,7 +36,10 @@ class ProductManagementTest extends TestCase
             'sizes' => 'S, M',
             'image' => UploadedFile::fake()->image('tee.jpg', 400, 500),
             'is_featured' => '1',
-        ])->assertRedirect(route('products.manage.index'));
+        ]);
+
+        $response->assertRedirect(route('products.manage.index'));
+        $this->followRedirects($response)->assertSee('เพิ่มสินค้าแล้ว', false);
 
         $product = Product::query()->where('name', 'เสื้อทดสอบ')->first();
 
@@ -46,7 +52,17 @@ class ProductManagementTest extends TestCase
         $this->get('/products/'.$product->slug)
             ->assertOk()
             ->assertSee('เสื้อทดสอบ')
-            ->assertSee('990 บาท');
+            ->assertSee('990 บาท')
+            ->assertSee('กดที่รูปเพื่อดูขนาดเต็มตามไฟล์ต้นฉบับ');
+
+        $this->get('/manage/products/'.$product->slug.'/edit')
+            ->assertOk()
+            ->assertSee('select2.min.js', false)
+            ->assertSee('name="category_id"', false)
+            ->assertSee('name="colors"', false)
+            ->assertSee('name="sizes"', false)
+            ->assertDontSee('name="colors[]"', false)
+            ->assertDontSee('name="sizes[]"', false);
 
         $this->put('/manage/products/'.$product->slug, [
             'name' => 'เสื้อทดสอบแก้',

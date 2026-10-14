@@ -21,10 +21,7 @@ class ProductController extends Controller
 
     public function create(): View
     {
-        return view('manage.form', [
-            'product' => new Product,
-            'categories' => Category::query()->orderBy('id')->get(),
-        ]);
+        return $this->formView(new Product);
     }
 
     public function store(Request $request): RedirectResponse
@@ -46,10 +43,7 @@ class ProductController extends Controller
 
     public function edit(Product $product): View
     {
-        return view('manage.form', [
-            'product' => $product,
-            'categories' => Category::query()->orderBy('id')->get(),
-        ]);
+        return $this->formView($product);
     }
 
     public function update(Request $request, Product $product): RedirectResponse
@@ -139,6 +133,14 @@ class ProductController extends Controller
             'sizes' => $sizes,
             'is_featured' => $request->boolean('is_featured'),
         ];
+    }
+
+    private function formView(Product $product): View
+    {
+        return view('manage.form', [
+            'product' => $product,
+            'categories' => Category::query()->orderBy('id')->get(),
+        ]);
     }
 
     private function uniqueSlug(string $input, Product $product): string

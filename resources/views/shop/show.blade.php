@@ -4,8 +4,11 @@
 
 @section('content')
     <article class="product-detail">
-        <div class="product-detail-media">
-            <img src="{{ $product->imageUrl() }}" alt="{{ $product->name }}">
+        <div>
+            <button class="product-detail-media" type="button" data-zoom-open>
+                <img src="{{ $product->imageUrl() }}" alt="{{ $product->name }}">
+            </button>
+            <p class="image-zoom-note">กดที่รูปเพื่อดูขนาดเต็มตามไฟล์ต้นฉบับ</p>
         </div>
         <div class="product-detail-copy">
             <p class="breadcrumb">
@@ -62,4 +65,22 @@
             </div>
         </section>
     @endif
+
+    <dialog class="image-zoom" data-zoom>
+        <form method="dialog">
+            <button type="submit">ปิด</button>
+        </form>
+        <img alt="{{ $product->name }}">
+    </dialog>
+
+    <script>
+        const zoom = document.querySelector('[data-zoom]');
+        const source = document.querySelector('[data-zoom-open] img');
+        document.querySelector('[data-zoom-open]')?.addEventListener('click', () => {
+            const preview = zoom?.querySelector('img');
+            if (!zoom || !source || !preview) return;
+            preview.src = source.currentSrc || source.src;
+            zoom.showModal();
+        });
+    </script>
 @endsection

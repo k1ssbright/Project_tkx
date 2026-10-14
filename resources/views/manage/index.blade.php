@@ -12,10 +12,6 @@
         <a class="text-link" href="{{ route('products.manage.create') }}">เพิ่มสินค้า</a>
     </section>
 
-    @if (session('status'))
-        <p class="manage-status">{{ session('status') }}</p>
-    @endif
-
     @if ($products->isEmpty())
         <p class="empty">ยังไม่มีสินค้า</p>
     @else
@@ -29,7 +25,7 @@
                     </div>
                     <div class="manage-actions">
                         <a href="{{ route('products.manage.edit', $product) }}">แก้ไข</a>
-                        <form method="post" action="{{ route('products.manage.destroy', $product) }}" onsubmit="return confirm('ลบสินค้านี้ใช่ไหม')">
+                        <form method="post" action="{{ route('products.manage.destroy', $product) }}" data-confirm="ลบสินค้านี้ใช่ไหม" data-confirm-button="ลบ">
                             @csrf
                             @method('DELETE')
                             <button type="submit">ลบ</button>

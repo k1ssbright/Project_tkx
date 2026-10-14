@@ -2,6 +2,10 @@
 
 @section('title', $product->exists ? 'แก้ไข '.$product->name : 'เพิ่มสินค้า')
 
+@push('head')
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css">
+@endpush
+
 @section('content')
     @php
         $featured = session()->hasOldInput() ? (bool) old('is_featured') : (bool) $product->is_featured;
@@ -27,7 +31,7 @@
                     <span class="photo-change">{{ $product->exists ? 'เปลี่ยนรูป' : 'อัปโหลดรูป' }}</span>
                     <input class="photo-input" name="image" type="file" accept="image/jpeg,image/png,image/webp" @required(! $product->exists)>
                 </label>
-                <p class="photo-hint">รูปแนวตั้งจะพอดีกับกรอบสินค้า{{ $product->exists ? ' ถ้าไม่เลือกรูปใหม่ ระบบใช้รูปเดิม' : '' }}</p>
+                <p class="photo-hint">แสดงรูปต้นฉบับทั้งภาพ{{ $product->exists ? ' ถ้าไม่เลือกรูปใหม่ ระบบใช้รูปเดิม' : '' }}</p>
                 @error('image')<p class="field-error">{{ $message }}</p>@enderror
             </div>
 
@@ -42,7 +46,7 @@
                     <div class="field-row">
                         <label class="field">
                             <span>หมวดหมู่</span>
-                            <select name="category_id" required>
+                            <select name="category_id" data-placeholder="เลือกหมวดหมู่" required>
                                 <option value="">เลือกหมวดหมู่</option>
                                 @foreach ($categories as $category)
                                     <option value="{{ $category->id }}" @selected((string) old('category_id', $product->category_id) === (string) $category->id)>{{ $category->name }}</option>
@@ -123,3 +127,17 @@
         });
     </script>
 @endsection
+
+@push('scripts')
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script>
+        window.jQuery('.editor select[name="category_id"]').select2({
+            width: '100%',
+            placeholder: 'เลือกหมวดหมู่',
+            language: {
+                noResults: () => 'ไม่พบรายการ',
+            },
+        });
+    </script>
+@endpush
