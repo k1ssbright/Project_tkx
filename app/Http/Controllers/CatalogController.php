@@ -72,4 +72,9 @@ class CatalogController extends Controller
     {
         return view('about');
     }
+
+    public function contact(): View
+    {
+        return view('contact');
+    }
 }

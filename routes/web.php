@@ -8,6 +8,7 @@ Route::get('/', [CatalogController::class, 'home'])->name('home');
 Route::get('/shop', [CatalogController::class, 'index'])->name('shop.index');
 Route::get('/products/{product}', [CatalogController::class, 'show'])->name('products.show');
 Route::get('/about', [CatalogController::class, 'about'])->name('about');
+Route::get('/contact', [CatalogController::class, 'contact'])->name('contact');
 Route::get('/articles/{article}', [CatalogController::class, 'article'])->name('articles.show');
 
 Route::get('/manage/products', [ProductController::class, 'index'])->name('products.manage.index');

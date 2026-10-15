@@ -31,6 +31,19 @@ class CatalogSeeder extends Seeder
         $products = [
             [
                 'category_id' => $shirts->id,
+                'name' => 'เสื้อโปโล Nano Circuit',
+                'slug' => 'nano-circuit-polo',
+                'price' => 1290,
+                'fabric' => 'ผ้าโปโล',
+                'description' => 'โปโลคอปกสีดำตัดส้ม พิมพ์โลโก้ Nano Circuit และชื่อสปอนเซอร์ด้านหน้า ด้านหลังพิมพ์ชื่อสนาม ใช้เป็นยูนิฟอร์มทีมและของที่ระลึกของสนามได้',
+                'sizes' => ['S', 'M', 'L', 'XL'],
+                'colors' => ['ดำ', 'ส้ม'],
+                'image' => 'images/products/nano-circuit-polo.jpg',
+                'sort_order' => 1,
+                'is_featured' => true,
+            ],
+            [
+                'category_id' => $shirts->id,
                 'name' => 'เสื้อเชิ้ตลินินสีงาช้าง',
                 'slug' => 'ivory-linen-shirt',
                 'price' => 1890,
@@ -39,7 +52,7 @@ class CatalogSeeder extends Seeder
                 'sizes' => ['S', 'M', 'L', 'XL'],
                 'colors' => ['งาช้าง', 'ขาว'],
                 'image' => 'images/products/linen-shirt.jpg',
-                'sort_order' => 1,
+                'sort_order' => 2,
                 'is_featured' => true,
             ],
             [
@@ -52,7 +65,7 @@ class CatalogSeeder extends Seeder
                 'sizes' => ['S', 'M', 'L', 'XL'],
                 'colors' => ['ขาว'],
                 'image' => 'images/products/white-tee.jpg',
-                'sort_order' => 2,
+                'sort_order' => 3,
                 'is_featured' => true,
             ],
             [
@@ -65,7 +78,7 @@ class CatalogSeeder extends Seeder
                 'sizes' => ['S', 'M', 'L', 'XL'],
                 'colors' => ['ขาว'],
                 'image' => 'images/products/white-shirt.jpg',
-                'sort_order' => 3,
+                'sort_order' => 4,
                 'is_featured' => true,
             ],
             [
@@ -78,7 +91,7 @@ class CatalogSeeder extends Seeder
                 'sizes' => ['S', 'M', 'L', 'XL'],
                 'colors' => ['ขาว'],
                 'image' => 'images/products/ivory-polo.jpg',
-                'sort_order' => 4,
+                'sort_order' => 5,
                 'is_featured' => false,
             ],
             [
@@ -91,7 +104,7 @@ class CatalogSeeder extends Seeder
                 'sizes' => ['28', '30', '32', '34', '36'],
                 'colors' => ['ครีม'],
                 'image' => 'images/products/cream-pants.jpg',
-                'sort_order' => 5,
+                'sort_order' => 6,
                 'is_featured' => true,
             ],
             [
@@ -104,7 +117,7 @@ class CatalogSeeder extends Seeder
                 'sizes' => ['S', 'M', 'L', 'XL'],
                 'colors' => ['ขาว'],
                 'image' => 'images/products/white-wide.jpg',
-                'sort_order' => 6,
+                'sort_order' => 7,
                 'is_featured' => true,
             ],
             [
@@ -117,7 +130,7 @@ class CatalogSeeder extends Seeder
                 'sizes' => ['28', '30', '32', '34', '36'],
                 'colors' => ['เบจ'],
                 'image' => 'images/products/beige-chino.jpg',
-                'sort_order' => 7,
+                'sort_order' => 8,
                 'is_featured' => false,
             ],
             [
@@ -130,7 +143,7 @@ class CatalogSeeder extends Seeder
                 'sizes' => ['28', '30', '32', '34', '36'],
                 'colors' => ['ฟอกอ่อน'],
                 'image' => 'images/products/light-jeans.jpg',
-                'sort_order' => 8,
+                'sort_order' => 9,
                 'is_featured' => false,
             ],
         ];
