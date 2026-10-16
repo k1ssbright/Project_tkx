@@ -4,7 +4,7 @@
 
 @section('content')
     <section class="billboard">
-        <img src="{{ asset('images/hero.jpg') }}?v={{ filemtime(public_path('images/hero.jpg')) }}" alt="ภาพจากคอลเลกชัน TKX">
+        <img src="{{ asset('images/nanocircuit-logo') }}?v={{ filemtime(public_path('images/hero.jpg')) }}" alt="ภาพจากคอลเลกชัน TKX">
         <div class="billboard-copy">
             <p>New arrival</p>
             <h1>เสื้อผ้าและกางเกง<br>โทนขาว</h1>
