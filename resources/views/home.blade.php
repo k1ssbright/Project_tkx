@@ -30,24 +30,6 @@
         </div>
     </section>
 
-    <section class="articles" id="articles">
-        <div class="articles-head">
-            <h2>บทความ</h2>
-        </div>
-        <div class="article-grid">
-            @foreach ($articles as $article)
-                <article class="article-card">
-                    <a href="{{ route('articles.show', $article) }}">
-                        <img src="{{ $article->imageUrl() }}" alt="">
-                        <h3>{{ $article->title }}</h3>
-                    </a>
-                    <p>{{ $article->excerpt }}</p>
-                    <a class="read-more" href="{{ route('articles.show', $article) }}">อ่านต่อ</a>
-                </article>
-            @endforeach
-        </div>
-    </section>
-
     <section class="banner-row">
         @foreach ($categories as $category)
             @php $cover = $grouped->get($category->id, collect())->first(); @endphp

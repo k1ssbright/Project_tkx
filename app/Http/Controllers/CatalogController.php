@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Article;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\ProductView;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -18,7 +19,13 @@ class CatalogController extends Controller
             'featured' => $catalog->where('is_featured', true)->take(4)->values(),
             'categories' => Category::query()->withCount('products')->orderBy('id')->get(),
             'grouped' => $catalog->groupBy('category_id'),
-            'articles' => Article::query()->orderBy('sort_order')->limit(3)->get(),
+        ]);
+    }
+
+    public function articles(): View
+    {
+        return view('articles.index', [
+            'articles' => Article::query()->orderBy('sort_order')->orderByDesc('id')->get(),
         ]);
     }
 
@@ -54,6 +61,8 @@ class CatalogController extends Controller
     {
         $product->load('category');
 
+        $this->recordProductView($product);
+
         $related = Product::query()
             ->with('category')
             ->where('category_id', $product->category_id)
@@ -66,6 +75,23 @@ class CatalogController extends Controller
             'product' => $product,
             'related' => $related,
         ]);
+    }
+
+    private function recordProductView(Product $product): void
+    {
+        $viewedKey = 'viewed_products';
+        $viewed = session()->get($viewedKey, []);
+
+        if (! in_array($product->id, $viewed, true)) {
+            ProductView::query()->create([
+                'product_id' => $product->id,
+                'ip_address' => request()->ip(),
+                'user_agent' => substr((string) request()->userAgent(), 0, 255),
+                'viewed_at' => now(),
+            ]);
+
+            session()->push($viewedKey, $product->id);
+        }
     }
 
     public function about(): View

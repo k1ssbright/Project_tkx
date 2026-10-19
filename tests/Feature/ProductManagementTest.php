@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Tests\TestCase;
@@ -16,7 +17,10 @@ class ProductManagementTest extends TestCase
     {
         $this->seed();
 
-        $this->get('/manage/products')
+        $admin = User::query()->where('is_admin', true)->first();
+        $this->actingAs($admin);
+
+        $this->get('/admin/products')
             ->assertOk()
             ->assertSee('จัดการสินค้า')
             ->assertSee('เสื้อเชิ้ตลินินสีงาช้าง')
@@ -26,7 +30,7 @@ class ProductManagementTest extends TestCase
 
         $categoryId = Category::query()->where('slug', 'shirts')->value('id');
 
-        $response = $this->post('/manage/products', [
+        $response = $this->post('/admin/products', [
             'name' => 'เสื้อทดสอบ',
             'category_id' => $categoryId,
             'price' => 990,
@@ -38,7 +42,7 @@ class ProductManagementTest extends TestCase
             'is_featured' => '1',
         ]);
 
-        $response->assertRedirect(route('products.manage.index'));
+        $response->assertRedirect(route('admin.products.index'));
         $this->followRedirects($response)->assertSee('เพิ่มสินค้าแล้ว', false);
 
         $product = Product::query()->where('name', 'เสื้อทดสอบ')->first();
@@ -55,7 +59,7 @@ class ProductManagementTest extends TestCase
             ->assertSee('990 บาท')
             ->assertSee('กดที่รูปเพื่อดูขนาดเต็มตามไฟล์ต้นฉบับ');
 
-        $this->get('/manage/products/'.$product->slug.'/edit')
+        $this->get('/admin/products/'.$product->slug.'/edit')
             ->assertOk()
             ->assertSee('select2.min.js', false)
             ->assertSee('name="category_id"', false)
@@ -64,7 +68,7 @@ class ProductManagementTest extends TestCase
             ->assertDontSee('name="colors[]"', false)
             ->assertDontSee('name="sizes[]"', false);
 
-        $this->put('/manage/products/'.$product->slug, [
+        $this->put('/admin/products/'.$product->slug, [
             'name' => 'เสื้อทดสอบแก้',
             'slug' => $product->slug,
             'category_id' => $categoryId,
@@ -73,7 +77,7 @@ class ProductManagementTest extends TestCase
             'description' => 'คำอธิบายใหม่',
             'colors' => 'ขาว',
             'sizes' => 'M',
-        ])->assertRedirect(route('products.manage.index'));
+        ])->assertRedirect(route('admin.products.index'));
 
         $product->refresh();
         $image = $product->image;
@@ -82,8 +86,8 @@ class ProductManagementTest extends TestCase
         $this->assertSame(1000, $product->price);
         $this->assertFalse($product->is_featured);
 
-        $this->delete('/manage/products/'.$product->slug)
-            ->assertRedirect(route('products.manage.index'));
+        $this->delete('/admin/products/'.$product->slug)
+            ->assertRedirect(route('admin.products.index'));
 
         $this->assertModelMissing($product);
         $this->assertFileDoesNotExist(public_path($image));

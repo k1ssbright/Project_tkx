@@ -7,7 +7,7 @@
         <p class="breadcrumb">
             <a href="{{ route('home') }}">หน้าแรก</a>
             <span>/</span>
-            <a href="{{ route('home') }}#articles">บทความ</a>
+            <a href="{{ route('articles.index') }}">ข่าวสาร</a>
         </p>
         <p class="eyebrow">Article</p>
         <h1>{{ $article->title }}</h1>
