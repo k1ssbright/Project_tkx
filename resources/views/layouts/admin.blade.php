@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noindex">
-    <title>@yield('title', 'หลังบ้าน') — TKX Admin</title>
+    <title>@yield('title', 'หลังบ้าน') — NANO CIRCUIT Admin</title>
     @include('partials.head-assets')
 </head>
 <body class="admin-body">

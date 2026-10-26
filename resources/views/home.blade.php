@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'TKX')
+@section('title', 'NANO CIRCUIT')
 
 @section('content')
     <section class="billboard">

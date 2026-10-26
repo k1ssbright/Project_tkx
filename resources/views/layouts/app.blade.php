@@ -3,8 +3,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>@yield('title', 'TKX') — เสื้อผ้าและกางเกงโทนขาว</title>
-    <meta name="description" content="TKX โชว์เสื้อผ้าและกางเกงโทนขาว ครีม และเบจ">
+    <title>@yield('title', 'NANO CIRCUIT') — เสื้อผ้าและกางเกงโทนขาว</title>
+    <meta name="description" content="NANO CIRCUIT โชว์เสื้อผ้าและกางเกงโทนขาว ครีม และเบจ">
     @include('partials.head-assets')
 </head>
 <body>
@@ -59,7 +59,7 @@
                 <a href="{{ route('news.index') }}">ข่าวสาร</a>
             </div>
         </div>
-        <p class="footer-note">© TKX</p>
+        <p class="footer-note">© NANO CIRCUIT</p>
     </footer>
 </body>
 </html>

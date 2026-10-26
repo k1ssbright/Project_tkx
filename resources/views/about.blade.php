@@ -4,9 +4,9 @@
 
 @section('content')
     <section class="page-intro about">
-        <p class="eyebrow">About TKX</p>
+        <p class="eyebrow">About NANO CIRCUIT</p>
         <h1>ร้านเสื้อผ้าที่เลือกเฉพาะโทนขาว</h1>
-        <p class="lede">TKX รวมเสื้อและกางเกงสีขาว ครีม และเบจไว้ในที่เดียว เน้นผ้าที่ใส่สบายและทรงที่เรียบพอจะใส่ซ้ำได้ทั้งสัปดาห์</p>
+        <p class="lede">NANO CIRCUIT รวมเสื้อและกางเกงสีขาว ครีม และเบจไว้ในที่เดียว เน้นผ้าที่ใส่สบายและทรงที่เรียบพอจะใส่ซ้ำได้ทั้งสัปดาห์</p>
     </section>
 
     <section class="about-grid">

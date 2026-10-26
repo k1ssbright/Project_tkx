@@ -512,6 +512,65 @@ img {
     border: 1px solid var(--line);
 }
 
+.auth-split {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+    min-height: calc(100svh - 68px);
+    margin-bottom: -48px;
+}
+
+.auth-visual {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+    background: #efe9df;
+}
+
+.auth-visual img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 18% center;
+}
+
+.auth-visual::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(250, 247, 241, 0.94) 0%, rgba(250, 247, 241, 0.6) 26%, rgba(250, 247, 241, 0) 52%);
+}
+
+.auth-visual-copy {
+    position: relative;
+    z-index: 1;
+    max-width: 40rem;
+    padding: 48px 56px;
+}
+
+.auth-visual-copy h2 {
+    margin-bottom: 10px;
+    font-size: clamp(36px, 4vw, 56px);
+}
+
+.auth-visual-copy p:last-child {
+    max-width: 24rem;
+    margin: 0;
+    color: #4a4540;
+    font-size: 16px;
+}
+
+.auth-split .auth-card {
+    align-self: center;
+    justify-self: center;
+    width: min(420px, calc(100% - 48px));
+    margin: 0;
+    padding: 56px 0;
+    border: 0;
+}
+
 .auth-card h1 {
     margin-bottom: 24px;
     font-size: clamp(36px, 5vw, 48px);
@@ -1703,6 +1762,36 @@ h2 {
 
     .values {
         grid-template-columns: 1fr;
+    }
+
+    .auth-split {
+        grid-template-columns: 1fr;
+        min-height: 0;
+        margin-bottom: 0;
+    }
+
+    .auth-visual {
+        min-height: 220px;
+    }
+
+    .auth-visual img {
+        object-position: center 35%;
+    }
+
+    .auth-visual-copy {
+        padding: 24px 20px;
+    }
+
+    .auth-visual-copy h2 {
+        font-size: 32px;
+    }
+
+    .auth-visual-copy p:last-child {
+        font-size: 14px;
+    }
+
+    .auth-split .auth-card {
+        padding: 36px 0 24px;
     }
 
     .value {

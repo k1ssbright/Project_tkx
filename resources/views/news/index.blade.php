@@ -6,7 +6,7 @@
     <section class="page-intro">
         <p class="eyebrow">News</p>
         <h1>ข่าวสาร</h1>
-        <p class="lede">อัปเดตคอลเลกชันใหม่ เคล็ดลับการแต่งตัวโทนขาว และข่าวจากร้าน TKX</p>
+        <p class="lede">อัปเดตคอลเลกชันใหม่ เคล็ดลับการแต่งตัวโทนขาว และข่าวจากร้าน NANO CIRCUIT</p>
     </section>
 
     @if ($articles->isEmpty())
