@@ -4,18 +4,34 @@
 
 @section('content')
     <section class="billboard">
-        <img src="{{ asset('images/hero.jpg') }}?v={{ filemtime(public_path('images/hero.jpg')) }}" alt="ภาพจากคอลเลกชัน TKX">
+        <img src="{{ asset('images/hero-wardrobe.jpg') }}?v={{ filemtime(public_path('images/hero-wardrobe.jpg')) }}" alt="ราวแขวนเสื้อเชิ้ตลินิน เสื้อโปโล เสื้อยืด และกางเกงโทนขาวครีม">
         <div class="billboard-copy">
-            <p>New arrival</p>
+            <p class="billboard-eyebrow">New arrival · White wardrobe</p>
             <h1>เสื้อผ้าและกางเกง<br>โทนขาว</h1>
-            <a class="buy-now" href="{{ route('shop.index') }}">ดูสินค้า</a>
+            <p class="billboard-lede">ลินินและคอตตอนสีขาว ครีม และเบจ ตัดเย็บเรียบ ใส่ซ้ำได้ทุกวัน</p>
+            <div class="billboard-actions">
+                <a class="buy-now" href="{{ route('shop.index') }}">ดูสินค้าทั้งหมด</a>
+                <a class="billboard-link" href="{{ route('news.index') }}">อ่านข่าวสาร</a>
+            </div>
         </div>
     </section>
 
-    <section class="campaign">
-        <p class="eyebrow">White wardrobe</p>
-        <h2>เสื้อผ้าและกางเกงโทนขาว</h2>
-        <p class="lede">คอลเลกชันผ้าลินินและคอตตอนสีขาว ครีม และเบจ ตัดเย็บเรียบ ใส่ซ้ำได้ทุกวันโดยไม่ต้องมีลาย</p>
+    <section class="values" aria-label="จุดเด่นของร้าน">
+        <div class="value">
+            <span>01</span>
+            <h2>ลินินและคอตตอน</h2>
+            <p>เนื้อผ้าระบายอากาศดี ใส่สบายในอากาศร้อน</p>
+        </div>
+        <div class="value">
+            <span>02</span>
+            <h2>โทนขาว ครีม เบจ</h2>
+            <p>ทุกชิ้นจับคู่กันได้ ไม่ต้องคิดเรื่องสีให้ยุ่งยาก</p>
+        </div>
+        <div class="value">
+            <span>03</span>
+            <h2>ตัดเย็บเรียบ</h2>
+            <p>ไม่มีลาย ไม่มีโลโก้ใหญ่ ใส่ซ้ำได้ทุกวัน</p>
+        </div>
     </section>
 
     <section class="shelf" id="new">
@@ -26,24 +42,6 @@
         <div class="product-grid">
             @foreach ($featured as $featuredProduct)
                 @include('partials.product-card', ['product' => $featuredProduct])
-            @endforeach
-        </div>
-    </section>
-
-    <section class="articles" id="articles">
-        <div class="articles-head">
-            <h2>บทความ</h2>
-        </div>
-        <div class="article-grid">
-            @foreach ($articles as $article)
-                <article class="article-card">
-                    <a href="{{ route('articles.show', $article) }}">
-                        <img src="{{ $article->imageUrl() }}" alt="">
-                        <h3>{{ $article->title }}</h3>
-                    </a>
-                    <p>{{ $article->excerpt }}</p>
-                    <a class="read-more" href="{{ route('articles.show', $article) }}">อ่านต่อ</a>
-                </article>
             @endforeach
         </div>
     </section>

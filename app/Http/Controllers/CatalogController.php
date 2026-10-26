@@ -18,14 +18,23 @@ class CatalogController extends Controller
             'featured' => $catalog->where('is_featured', true)->take(4)->values(),
             'categories' => Category::query()->withCount('products')->orderBy('id')->get(),
             'grouped' => $catalog->groupBy('category_id'),
-            'articles' => Article::query()->orderBy('sort_order')->limit(3)->get(),
+        ]);
+    }
+
+    public function news(): View
+    {
+        return view('news.index', [
+            'articles' => Article::query()->latest()->latest('id')->paginate(9),
         ]);
     }
 
     public function article(Article $article): View
     {
-        return view('articles.show', [
+        $article->load('images');
+
+        return view('news.show', [
             'article' => $article,
+            'others' => Article::query()->whereKeyNot($article->id)->latest()->latest('id')->limit(3)->get(),
         ]);
     }
 
@@ -50,8 +59,12 @@ class CatalogController extends Controller
         ]);
     }
 
-    public function show(Product $product): View
+    public function show(Request $request, Product $product): View
     {
+        if (! $request->user()?->is_admin) {
+            $product->views()->create(['viewed_at' => now()]);
+        }
+
         $product->load('category');
 
         $related = Product::query()

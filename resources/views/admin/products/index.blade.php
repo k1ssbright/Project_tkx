@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('title', 'จัดการสินค้า')
 
@@ -9,12 +9,8 @@
             <h1>จัดการสินค้า</h1>
             <p class="lede">เพิ่ม แก้ไข หรือลบสินค้าในคอลเลกชัน รูปที่อัปโหลดจะไปแทนรูปเดิมทันที</p>
         </div>
-        <a class="text-link" href="{{ route('products.manage.create') }}">เพิ่มสินค้า</a>
+        <a class="text-link" href="{{ route('admin.products.create') }}">เพิ่มสินค้า</a>
     </section>
-
-    @if (session('status'))
-        <p class="manage-status">{{ session('status') }}</p>
-    @endif
 
     @if ($products->isEmpty())
         <p class="empty">ยังไม่มีสินค้า</p>
@@ -25,11 +21,12 @@
                     <img src="{{ $product->imageUrl() }}" alt="">
                     <div>
                         <h2>{{ $product->name }}</h2>
-                        <p>{{ $product->category->name }} · {{ $product->formattedPrice() }}</p>
+                        <p>{{ $product->category->name }} · {{ $product->formattedPrice() }} · เข้าชมทั้งหมด {{ number_format($product->views_count) }} ครั้ง</p>
                     </div>
                     <div class="manage-actions">
-                        <a href="{{ route('products.manage.edit', $product) }}">แก้ไข</a>
-                        <form method="post" action="{{ route('products.manage.destroy', $product) }}" onsubmit="return confirm('ลบสินค้านี้ใช่ไหม')">
+                        <a href="{{ route('products.show', $product) }}" target="_blank" rel="noopener">ดูหน้าร้าน</a>
+                        <a href="{{ route('admin.products.edit', $product) }}">แก้ไข</a>
+                        <form method="post" action="{{ route('admin.products.destroy', $product) }}" onsubmit="return confirm('ลบสินค้านี้ใช่ไหม')">
                             @csrf
                             @method('DELETE')
                             <button type="submit">ลบ</button>

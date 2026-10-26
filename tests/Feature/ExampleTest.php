@@ -17,13 +17,26 @@ class ExampleTest extends TestCase
             ->assertOk()
             ->assertSee('เสื้อผ้าและกางเกง')
             ->assertSee('เสื้อเชิ้ตลินินสีงาช้าง')
+            ->assertSee('เข้าสู่ระบบ')
+            ->assertSee('สมัครสมาชิก')
+            ->assertDontSee('ใส่โทนขาวทั้งชุดโดยไม่ดูจืด')
+            ->assertDontSee('อ่านต่อ')
+            ->assertDontSee('จัดการสินค้า');
+
+        $this->get('/news')
+            ->assertOk()
+            ->assertSee('ข่าวสาร')
             ->assertSee('ใส่โทนขาวทั้งชุดโดยไม่ดูจืด')
             ->assertSee('อ่านต่อ');
 
-        $this->get('/articles/linen-or-cotton')
+        $this->get('/news/linen-or-cotton')
             ->assertOk()
             ->assertSee('ลินินกับคอตตอน เลือกยังไง')
             ->assertSee('เสื้อเชิ้ตลินินเหมาะกับวันที่อยู่กลางแจ้ง');
+
+        $this->get('/articles/linen-or-cotton')
+            ->assertRedirect('/news/linen-or-cotton')
+            ->assertStatus(301);
 
         $this->get('/shop?category=pants')
             ->assertOk()

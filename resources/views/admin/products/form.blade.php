@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('title', $product->exists ? 'แก้ไข '.$product->name : 'เพิ่มสินค้า')
 
@@ -7,13 +7,13 @@
         $featured = session()->hasOldInput() ? (bool) old('is_featured') : (bool) $product->is_featured;
     @endphp
 
-    <form class="editor" method="post" enctype="multipart/form-data" action="{{ $product->exists ? route('products.manage.update', $product) : route('products.manage.store') }}">
+    <form class="editor" method="post" enctype="multipart/form-data" action="{{ $product->exists ? route('admin.products.update', $product) : route('admin.products.store') }}">
         @csrf
         @if ($product->exists)
             @method('PUT')
         @endif
 
-        <a class="editor-back" href="{{ route('products.manage.index') }}">กลับไปรายการสินค้า</a>
+        <a class="editor-back" href="{{ route('admin.products.index') }}">กลับไปรายการสินค้า</a>
         <header class="editor-head">
             <p class="eyebrow">{{ $product->exists ? 'แก้ไขสินค้า' : 'สินค้าใหม่' }}</p>
             <h1>{{ $product->exists ? $product->name : 'เพิ่มสินค้า' }}</h1>
@@ -104,7 +104,7 @@
                 </details>
 
                 <div class="editor-bar">
-                    <a href="{{ route('products.manage.index') }}">ยกเลิก</a>
+                    <a href="{{ route('admin.products.index') }}">ยกเลิก</a>
                     <button class="text-link" type="submit">{{ $product->exists ? 'บันทึก' : 'เพิ่มสินค้า' }}</button>
                 </div>
             </div>

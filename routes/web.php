@@ -1,18 +1,31 @@
 <?php
 
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\NewsController;
+use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CatalogController;
-use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [CatalogController::class, 'home'])->name('home');
 Route::get('/shop', [CatalogController::class, 'index'])->name('shop.index');
 Route::get('/products/{product}', [CatalogController::class, 'show'])->name('products.show');
 Route::get('/about', [CatalogController::class, 'about'])->name('about');
-Route::get('/articles/{article}', [CatalogController::class, 'article'])->name('articles.show');
+Route::get('/news', [CatalogController::class, 'news'])->name('news.index');
+Route::get('/news/{article}', [CatalogController::class, 'article'])->name('news.show');
+Route::permanentRedirect('/articles/{article}', '/news/{article}');
 
-Route::get('/manage/products', [ProductController::class, 'index'])->name('products.manage.index');
-Route::get('/manage/products/create', [ProductController::class, 'create'])->name('products.manage.create');
-Route::post('/manage/products', [ProductController::class, 'store'])->name('products.manage.store');
-Route::get('/manage/products/{product}/edit', [ProductController::class, 'edit'])->name('products.manage.edit');
-Route::put('/manage/products/{product}', [ProductController::class, 'update'])->name('products.manage.update');
-Route::delete('/manage/products/{product}', [ProductController::class, 'destroy'])->name('products.manage.destroy');
+Route::middleware('guest')->group(function () {
+    Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
+    Route::post('/login', [AuthController::class, 'login']);
+    Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
+    Route::post('/register', [AuthController::class, 'register']);
+});
+
+Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth')->name('logout');
+
+Route::middleware(['auth', 'can:access-admin'])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/', DashboardController::class)->name('dashboard');
+    Route::resource('products', ProductController::class)->except('show');
+    Route::resource('news', NewsController::class)->except('show')->parameters(['news' => 'article']);
+});
