@@ -13,9 +13,11 @@ class CatalogController extends Controller
     public function home(): View
     {
         $catalog = Product::query()->with('category')->orderBy('sort_order')->get();
+        $featured = $catalog->where('is_featured', true)->take(4)->values();
 
         return view('home', [
-            'featured' => $catalog->where('is_featured', true)->take(4)->values(),
+            'featured' => $featured,
+            'more' => $catalog->whereNotIn('id', $featured->pluck('id'))->take(8)->values(),
             'categories' => Category::query()->withCount('products')->orderBy('id')->get(),
             'grouped' => $catalog->groupBy('category_id'),
         ]);
