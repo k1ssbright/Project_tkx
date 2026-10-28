@@ -34,48 +34,63 @@
         </div>
     </section>
 
-    <section class="shelf" id="new">
-        <div class="shelf-head">
-            <h2>สินค้าใหม่</h2>
-            <a href="{{ route('shop.index') }}">ดูทั้งหมด</a>
-        </div>
-        <div class="product-grid">
-            @foreach ($featured as $featuredProduct)
-                @include('partials.product-card', ['product' => $featuredProduct])
-            @endforeach
-        </div>
-    </section>
+    @if ($featured->isNotEmpty())
+        <section class="shelf" id="new">
+            <div class="shelf-head">
+                <div>
+                    <p class="eyebrow">New arrival</p>
+                    <h2>สินค้าใหม่</h2>
+                </div>
+                <a class="arrow-link" href="{{ route('shop.index') }}">ดูทั้งหมด @include('partials.icon-arrow')</a>
+            </div>
+            <div class="product-grid">
+                @foreach ($featured as $featuredProduct)
+                    @include('partials.product-card', ['product' => $featuredProduct])
+                @endforeach
+            </div>
+        </section>
+    @endif
 
-    <section class="banner-row">
+    <section class="banner-row" aria-label="หมวดหมู่สินค้า">
         @foreach ($categories as $category)
-            @php $cover = $grouped->get($category->id, collect())->first(); @endphp
+            @php $cover = $grouped->get($category->id, collect())->first(fn ($product) => $product->hasImageFile()); @endphp
             <a class="banner" href="{{ route('shop.index', ['category' => $category->slug]) }}">
                 @if ($cover)
-                    <img src="{{ $cover->imageUrl() }}" alt="">
+                    <img src="{{ $cover->imageUrl() }}" alt="" loading="lazy">
                 @endif
                 <span>
                     <small>{{ $category->subtitle }}</small>
                     <strong>{{ $category->name }}</strong>
-                    ดูสินค้า
+                    <em>ดูสินค้า {{ $category->products_count }} รายการ @include('partials.icon-arrow')</em>
                 </span>
             </a>
         @endforeach
     </section>
 
-    @foreach ($categories as $category)
-        @php $items = $grouped->get($category->id, collect())->take(4); @endphp
-        @if ($items->isNotEmpty())
-            <section class="shelf">
-                <div class="shelf-head">
-                    <h2>{{ $category->name }}</h2>
-                    <a href="{{ route('shop.index', ['category' => $category->slug]) }}">ดูทั้งหมด</a>
+    @if ($more->isNotEmpty())
+        <section class="shelf">
+            <div class="shelf-head">
+                <div>
+                    <p class="eyebrow">Collection</p>
+                    <h2>เลือกชมเพิ่มเติม</h2>
                 </div>
-                <div class="product-grid">
-                    @foreach ($items as $item)
-                        @include('partials.product-card', ['product' => $item])
-                    @endforeach
-                </div>
-            </section>
-        @endif
-    @endforeach
+                <a class="arrow-link" href="{{ route('shop.index') }}">ดูสินค้าทั้งหมด @include('partials.icon-arrow')</a>
+            </div>
+            <div class="product-grid">
+                @foreach ($more as $item)
+                    @include('partials.product-card', ['product' => $item])
+                @endforeach
+            </div>
+        </section>
+    @endif
+
+    <section class="closing-band">
+        <p class="eyebrow">White wardrobe</p>
+        <h2>ตู้เสื้อผ้าโทนขาว<br>ที่ใส่ได้ทุกวัน</h2>
+        <p>เลือกเสื้อและกางเกงที่จับคู่กันได้ทุกชิ้น ดูรายละเอียดผ้า สี และไซส์ได้ในหน้าสินค้า</p>
+        <div class="billboard-actions">
+            <a class="buy-now" href="{{ route('shop.index') }}">ดูสินค้าทั้งหมด</a>
+            <a class="billboard-link" href="{{ route('about') }}">เกี่ยวกับเรา</a>
+        </div>
+    </section>
 @endsection

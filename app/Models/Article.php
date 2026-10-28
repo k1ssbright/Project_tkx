@@ -22,9 +22,12 @@ class Article extends Model
     public function imageUrl(): string
     {
         $absolute = public_path($this->image);
-        $version = is_file($absolute) ? filemtime($absolute) : null;
 
-        return asset($this->image).($version ? '?v='.$version : '');
+        if (! is_file($absolute)) {
+            return asset('images/placeholder.svg');
+        }
+
+        return asset($this->image).'?v='.filemtime($absolute);
     }
 
     /**

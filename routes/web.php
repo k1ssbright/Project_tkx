@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\NewsController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\ProductViewController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CatalogController;
 use Illuminate\Support\Facades\Route;
@@ -27,6 +28,7 @@ Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth')->n
 
 Route::middleware(['auth', 'can:access-admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/', DashboardController::class)->name('dashboard');
+    Route::get('/views', ProductViewController::class)->name('views');
     Route::resource('products', ProductController::class)->except('show');
     Route::resource('news', NewsController::class)->except('show')->parameters(['news' => 'article']);
 });

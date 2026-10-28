@@ -9,6 +9,8 @@
     @stack('head')
 </head>
 <body>
+    <a class="skip-link" href="#main">ข้ามไปที่เนื้อหา</a>
+
     <header class="site-header">
         <div class="header-bar">
             <details class="menu">
@@ -32,31 +34,53 @@
         </div>
     </header>
 
-    <main>
+    <main id="main">
         @yield('content')
     </main>
 
     <footer class="site-footer" id="office">
         <div class="footer-grid">
-            <div>
-                <h2>About us</h2>
+            <div class="footer-brand">
+                <a class="logo" href="{{ route('home') }}">
+                    <img src="{{ asset('images/nanocircuit-logo.png') }}" alt="Nano Circuit">
+                </a>
                 <p>Nano Circuit Go-Kart Track, Bangna-Trad KM.15 — the newest go-kart racing venue on Bangkok’s eastern side, set to become the next hub for motorsport enthusiasts.</p>
-                <p>Monday–Sunday : 1pm to 10pm</p>
+                <a href="https://maps.app.goo.gl/srWzsP2ys1yA7cab7" target="_blank" rel="noopener">Bangna-trad, Bang Chalong, Bang Phli, Samut Prakan 10540</a>
+                <a href="tel:0612324516">0612324516</a>
             </div>
             <div>
-                <h2>Our services</h2>
+                <h2>Shop</h2>
+                <a href="{{ route('shop.index') }}">สินค้าใหม่</a>
+                <a href="{{ route('shop.index', ['category' => 'shirts']) }}">เสื้อ</a>
+                <a href="{{ route('shop.index', ['category' => 'pants']) }}">กางเกง</a>
+            </div>
+            <div>
+                <h2>Info</h2>
                 <a href="{{ route('about') }}">เกี่ยวกับเรา</a>
                 <a href="{{ route('news.index') }}">ข่าวสาร</a>
+                <a href="{{ route('contact') }}">ติดต่อเรา</a>
                 <a href="https://www.racefacer.com/en/login" target="_blank" rel="noopener">Time &amp; Membership</a>
             </div>
             <div>
-                <h2>Office</h2>
-                <a href="https://maps.app.goo.gl/srWzsP2ys1yA7cab7" target="_blank" rel="noopener">Bangna-trad, Bang Chalong,</a>
-                <a href="https://maps.app.goo.gl/srWzsP2ys1yA7cab7" target="_blank" rel="noopener">Bang Phli, Samut Prakan 10540</a>
-                <a href="tel:0612324516">0612324516</a>
+                <h2>Account</h2>
+                @auth
+                    @can('access-admin')
+                        <a href="{{ route('admin.dashboard') }}">หลังบ้าน</a>
+                    @endcan
+                    <form class="logout-form" method="post" action="{{ route('logout') }}">
+                        @csrf
+                        <button type="submit">ออกจากระบบ</button>
+                    </form>
+                @else
+                    <a href="{{ route('login') }}">เข้าสู่ระบบ</a>
+                    <a href="{{ route('register') }}">สมัครสมาชิก</a>
+                @endauth
             </div>
         </div>
-        <p class="footer-note">Copyright {{ date('Y') }} © Nano Circuit</p>
+        <div class="footer-note">
+            <span>Copyright © {{ now()->year }} Nano Circuit</span>
+            <span>Monday–Sunday : 1pm to 10pm</span>
+        </div>
     </footer>
     @include('partials.page-notice')
     <script>

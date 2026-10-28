@@ -55,11 +55,17 @@ class Product extends Model
         return number_format($this->price).' บาท';
     }
 
+    public function hasImageFile(): bool
+    {
+        return filled($this->image) && is_file(public_path($this->image));
+    }
+
     public function imageUrl(): string
     {
-        $absolute = public_path($this->image);
-        $version = is_file($absolute) ? filemtime($absolute) : null;
+        if (! $this->hasImageFile()) {
+            return asset('images/placeholder.svg');
+        }
 
-        return asset($this->image).($version ? '?v='.$version : '');
+        return asset($this->image).'?v='.filemtime(public_path($this->image));
     }
 }

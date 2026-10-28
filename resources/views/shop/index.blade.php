@@ -15,6 +15,7 @@
                     <span>{{ $category->products_count }}</span>
                 </a>
             @endforeach
+            <p class="result-count">{{ $products->count() }} รายการ</p>
         </div>
     </section>
 
