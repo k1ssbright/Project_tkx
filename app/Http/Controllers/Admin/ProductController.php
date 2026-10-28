@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\RedirectResponse;
@@ -14,8 +15,8 @@ class ProductController extends Controller
 {
     public function index(): View
     {
-        return view('manage.index', [
-            'products' => Product::query()->with('category')->orderBy('sort_order')->get(),
+        return view('admin.products.index', [
+            'products' => Product::query()->with('category')->withCount('views')->orderBy('sort_order')->get(),
         ]);
     }
 
@@ -37,7 +38,7 @@ class ProductController extends Controller
         ]);
 
         return redirect()
-            ->route('products.manage.index')
+            ->route('admin.products.index')
             ->with('status', 'เพิ่มสินค้าแล้ว');
     }
 
@@ -63,7 +64,7 @@ class ProductController extends Controller
         }
 
         return redirect()
-            ->route('products.manage.index')
+            ->route('admin.products.index')
             ->with('status', 'บันทึกสินค้าแล้ว');
     }
 
@@ -74,7 +75,7 @@ class ProductController extends Controller
         $this->deleteImageIfUnused($image);
 
         return redirect()
-            ->route('products.manage.index')
+            ->route('admin.products.index')
             ->with('status', 'ลบสินค้าแล้ว');
     }
 
@@ -92,7 +93,7 @@ class ProductController extends Controller
             'description' => ['required', 'string'],
             'colors' => ['required', 'string', 'max:255'],
             'sizes' => ['required', 'string', 'max:255'],
-            'image' => [$imageRequired ? 'required' : 'nullable', 'image', 'max:5120'],
+            'image' => [$imageRequired ? 'required' : 'nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:5120'],
         ], [
             'name.required' => 'กรอกชื่อสินค้า',
             'category_id.required' => 'เลือกหมวดหมู่',
@@ -104,6 +105,7 @@ class ProductController extends Controller
             'sizes.required' => 'ใส่ไซส์อย่างน้อย 1 ค่า',
             'image.required' => 'เลือกรูปสินค้า',
             'image.image' => 'ไฟล์รูปต้องเป็น jpg, png หรือ webp',
+            'image.mimes' => 'ไฟล์รูปต้องเป็น jpg, png หรือ webp',
             'image.max' => 'รูปต้องมีขนาดไม่เกิน 5 MB',
         ]);
 
@@ -137,7 +139,7 @@ class ProductController extends Controller
 
     private function formView(Product $product): View
     {
-        return view('manage.form', [
+        return view('admin.products.form', [
             'product' => $product,
             'categories' => Category::query()->orderBy('id')->get(),
         ]);
