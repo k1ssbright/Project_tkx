@@ -4,7 +4,7 @@
 
 @section('content')
     <section class="venue-hero">
-        <img src="{{ asset('images/about/cover.webp') }}" alt="ป้าย Nano Circuit บนอาคารสนาม">
+        <img src="{{ $siteImages['contact_cover_image'] }}" alt="ป้าย Nano Circuit บนอาคารสนาม">
         <div class="venue-hero-copy">
             <p>contact us</p>
             <h1>ติดต่อเรา</h1>

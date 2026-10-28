@@ -4,7 +4,7 @@
 
 @section('content')
     <section class="billboard">
-        <img src="{{ asset('images/hero-wardrobe.jpg') }}?v={{ filemtime(public_path('images/hero-wardrobe.jpg')) }}" alt="ราวแขวนเสื้อเชิ้ตลินิน เสื้อโปโล เสื้อยืด และกางเกงโทนขาวครีม">
+        <img src="{{ $siteImages['hero_image'] }}" alt="ราวแขวนเสื้อเชิ้ตลินิน เสื้อโปโล เสื้อยืด และกางเกงโทนขาวครีม">
         <div class="billboard-copy">
             <p class="billboard-eyebrow">New arrival · White wardrobe</p>
             <h1>เสื้อผ้าและกางเกง<br>โทนขาว</h1>

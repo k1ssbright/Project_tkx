@@ -4,7 +4,7 @@
 
 @section('content')
     <section class="venue-hero">
-        <img src="{{ asset('images/about/cover.webp') }}" alt="ป้าย Nano Circuit บนอาคารสนาม">
+        <img src="{{ $siteImages['about_cover_image'] }}" alt="ป้าย Nano Circuit บนอาคารสนาม">
         <div class="venue-hero-copy">
             <p>Nano Circuit</p>
             <h1>เกี่ยวกับเรา</h1>
@@ -12,7 +12,7 @@
     </section>
 
     <section class="venue-intro">
-        <img src="{{ asset('images/about/owners.webp') }}" alt="ทีม Nano Circuit ที่สนามโกคาร์ท">
+        <img src="{{ $siteImages['about_owners_image'] }}" alt="ทีม Nano Circuit ที่สนามโกคาร์ท">
         <p class="eyebrow">Go-Kart Track Thailand</p>
         <h2>Nano Circuit</h2>
         <p>Nano Circuit Go-Kart Track ตั้งอยู่ที่บางนา–ตราด กม.15 คือจุดหมายปลายทางโกคาร์ทแห่งใหม่ล่าสุดทางฝั่งตะวันออกของกรุงเทพฯ ที่กำลังจะกลายเป็นแหล่งรวมตัวของผู้หลงใหลมอเตอร์สปอร์ตอย่างแท้จริง สนามมีระยะทางต่อรอบ 900 เมตร และสามารถปรับเปลี่ยนรูปแบบได้มากถึง 8 เลย์เอาต์ มอบประสบการณ์การขับขี่ที่หลากหลาย</p>
@@ -23,10 +23,10 @@
         <p class="eyebrow">New experience</p>
         <h2>Dynamic Racing Experience</h2>
         <div class="venue-gallery">
-            <img src="{{ asset('images/about/gallery-1.webp') }}" alt="นักขับโกคาร์ทที่ Nano Circuit">
-            <img src="{{ asset('images/about/gallery-2.webp') }}" alt="บรรยากาศในสนาม Nano Circuit">
-            <img src="{{ asset('images/about/gallery-3.webp') }}" alt="โกคาร์ทบนสนาม Nano Circuit">
-            <img src="{{ asset('images/about/gallery-4.webp') }}" alt="การแข่งขันที่ Nano Circuit">
+            <img src="{{ $siteImages['about_gallery_1_image'] }}" alt="นักขับโกคาร์ทที่ Nano Circuit">
+            <img src="{{ $siteImages['about_gallery_2_image'] }}" alt="บรรยากาศในสนาม Nano Circuit">
+            <img src="{{ $siteImages['about_gallery_3_image'] }}" alt="โกคาร์ทบนสนาม Nano Circuit">
+            <img src="{{ $siteImages['about_gallery_4_image'] }}" alt="การแข่งขันที่ Nano Circuit">
         </div>
     </section>
 
@@ -34,7 +34,7 @@
         <p class="eyebrow">Adrenalin</p>
         <h2>The Professional<br>Kart Thailand</h2>
         <p>ที่ Nano Circuit เรามีทุกอย่างที่คนรักมอเตอร์สปอร์ตต้องการ ตั้งแต่สนามโกคาร์ทระยะทาง 900 เมตรที่ปรับเปลี่ยนได้หลายรูปแบบ รถโกคาร์ทประสิทธิภาพสูงรุ่น TS7 และรถสำหรับนักขับรุ่นเยาว์ ไปจนถึงสิ่งอำนวยความสะดวกระดับมืออาชีพที่รองรับทั้งผู้ขับขี่ทั่วไปและนักแข่งจริงจัง Nano Circuit ถูกออกแบบมาเพื่อมอบความเร้าใจของการแข่งรถอย่างแท้จริงในทุก ๆ รอบที่คุณขับ</p>
-        <img src="{{ asset('images/about/track.webp') }}" alt="สนามโกคาร์ท Nano Circuit">
+        <img src="{{ $siteImages['about_track_image'] }}" alt="สนามโกคาร์ท Nano Circuit">
     </section>
 
     <section class="venue-facility">
@@ -87,12 +87,12 @@
         <h2>Nano Circuit</h2>
         <div class="portfolio-grid">
             <article>
-                <img src="{{ asset('images/about/grand-opening.webp') }}" alt="Nano Circuit Grand Opening">
+                <img src="{{ $siteImages['about_grand_opening_image'] }}" alt="Nano Circuit Grand Opening">
                 <time datetime="2025-11-26">พฤศจิกายน 26, 2025</time>
                 <h3>Nanocircuit Grand Openning</h3>
             </article>
             <article>
-                <img src="{{ asset('images/about/sprint-race.webp') }}" alt="Nano Circuit Sprint Race 1">
+                <img src="{{ $siteImages['about_sprint_race_image'] }}" alt="Nano Circuit Sprint Race 1">
                 <time datetime="2025-12-01">ธันวาคม 1, 2025</time>
                 <h3>Nanocircuit Sprint Race#1</h3>
             </article>

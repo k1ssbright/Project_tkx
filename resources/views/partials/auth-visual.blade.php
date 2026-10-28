@@ -1,5 +1,5 @@
 <div class="auth-visual">
-    <img src="{{ asset('images/hero-wardrobe.jpg') }}?v={{ filemtime(public_path('images/hero-wardrobe.jpg')) }}" alt="">
+    <img src="{{ $siteImages['hero_image'] }}" alt="">
     <div class="auth-visual-copy">
         <p class="eyebrow">White wardrobe</p>
         <h2>{{ $heading }}</h2>

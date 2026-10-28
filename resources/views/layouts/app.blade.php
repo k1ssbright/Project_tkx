@@ -23,7 +23,7 @@
                 </nav>
             </details>
             <a class="logo" href="{{ route('home') }}">
-                <img src="{{ asset('images/nanocircuit-logo.png') }}" alt="Nano Circuit">
+                <img src="{{ $siteImages['logo_image'] }}" alt="Nano Circuit">
             </a>
             <nav class="site-nav" aria-label="หลัก">
                 @include('partials.nav-links')
@@ -42,7 +42,7 @@
         <div class="footer-grid">
             <div class="footer-brand">
                 <a class="logo" href="{{ route('home') }}">
-                    <img src="{{ asset('images/nanocircuit-logo.png') }}" alt="Nano Circuit">
+                    <img src="{{ $siteImages['logo_image'] }}" alt="Nano Circuit">
                 </a>
                 <p>Nano Circuit Go-Kart Track, Bangna-Trad KM.15 — the newest go-kart racing venue on Bangkok’s eastern side, set to become the next hub for motorsport enthusiasts.</p>
                 <a href="https://maps.app.goo.gl/srWzsP2ys1yA7cab7" target="_blank" rel="noopener">Bangna-trad, Bang Chalong, Bang Phli, Samut Prakan 10540</a>
@@ -104,6 +104,81 @@
                     menu.open = false;
                 }
             });
+        }
+
+        const siteHeader = document.querySelector('.site-header');
+
+        if (siteHeader) {
+            const updateHeaderShadow = () => {
+                siteHeader.classList.toggle('is-scrolled', window.scrollY > 8);
+            };
+
+            updateHeaderShadow();
+            window.addEventListener('scroll', updateHeaderShadow, { passive: true });
+        }
+
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        if (! prefersReducedMotion && 'IntersectionObserver' in window) {
+            const revealSelectors = [
+                '.values > .value',
+                '.shelf-head',
+                '.section-heading',
+                '.product-grid > .product-card',
+                '.banner-row > .banner',
+                '.closing-band > *',
+                '.article-grid > .article-card',
+                '.article > :nth-child(n+5)',
+                '.article-gallery > a',
+                '.venue-intro > *',
+                '.venue-experience > .eyebrow',
+                '.venue-experience > h2',
+                '.venue-gallery > img',
+                '.venue-story > *',
+                '.venue-facility > .eyebrow',
+                '.venue-facility > h2',
+                '.facility-grid > article',
+                '.venue-portfolio > .eyebrow',
+                '.venue-portfolio > h2',
+                '.portfolio-grid > article',
+                '.contact-copy > *',
+                '.contact-map',
+                '.footer-grid > *',
+            ];
+
+            const revealObserver = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-revealed');
+                        revealObserver.unobserve(entry.target);
+                    }
+                });
+            }, { rootMargin: '100000px 0px -10% 0px' });
+
+            const revealCountByParent = new Map();
+
+            document.querySelectorAll(revealSelectors.join(',')).forEach((revealTarget) => {
+                const siblingIndex = revealCountByParent.get(revealTarget.parentElement) ?? 0;
+
+                revealCountByParent.set(revealTarget.parentElement, siblingIndex + 1);
+                revealTarget.style.setProperty('--reveal-index', siblingIndex % 4);
+                revealTarget.dataset.reveal = '';
+
+                const finishReveal = (event) => {
+                    if (event.target === revealTarget && event.propertyName === 'transform' && revealTarget.classList.contains('is-revealed')) {
+                        revealTarget.removeAttribute('data-reveal');
+                        revealTarget.classList.remove('is-revealed');
+                        revealTarget.style.removeProperty('--reveal-index');
+                        revealTarget.removeEventListener('transitionend', finishReveal);
+                    }
+                };
+
+                revealTarget.addEventListener('transitionend', finishReveal);
+
+                revealObserver.observe(revealTarget);
+            });
+
+            document.documentElement.classList.add('has-motion');
         }
     </script>
     @stack('scripts')

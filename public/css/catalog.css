@@ -326,12 +326,14 @@ img {
     font-weight: 600;
     letter-spacing: 0.14em;
     text-align: center;
-    transition: background 0.2s ease;
+    transition: background 0.2s ease, transform 0.25s var(--ease), box-shadow 0.25s var(--ease);
 }
 
 .buy-now:hover {
     background: var(--accent);
     color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px rgba(254, 123, 7, 0.28);
 }
 
 .billboard-link {
@@ -882,7 +884,10 @@ h2 {
 }
 
 .product-media img {
-    object-fit: contain;
+    position: absolute;
+    inset: 0;
+    object-fit: cover;
+    object-position: center;
 }
 
 .product-card img {
@@ -1673,6 +1678,226 @@ h2 {
 
 .photo-picker-wide {
     aspect-ratio: 4 / 3;
+}
+
+.site-images-head {
+    margin-bottom: 8px;
+}
+
+.site-images-head h1 {
+    margin-bottom: 10px;
+}
+
+.site-images-head .lede {
+    max-width: 44rem;
+    margin: 0;
+}
+
+.site-image-group {
+    margin-top: 40px;
+}
+
+.site-image-group-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 10px;
+    margin-bottom: 18px;
+}
+
+.site-image-group-head h2 {
+    margin: 0;
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.site-image-group-head span {
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.site-image-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.site-image-card {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    border: 1px solid var(--line);
+    background: var(--paper);
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.site-image-card:hover {
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+}
+
+.site-image-card.is-pending {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 1px var(--accent);
+}
+
+.site-image-picker {
+    position: relative;
+    display: block;
+    aspect-ratio: 3 / 2;
+    overflow: hidden;
+    background: #f3eee6;
+    cursor: pointer;
+}
+
+.site-image-picker img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.25s ease;
+}
+
+.site-image-picker:hover img {
+    transform: scale(1.03);
+}
+
+.site-image-logo {
+    background: #111111;
+}
+
+.site-image-logo img {
+    inset: 0 14%;
+    width: 72%;
+    object-fit: contain;
+}
+
+.site-image-logo:hover img {
+    transform: none;
+}
+
+.site-image-change {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    z-index: 1;
+    background: rgba(0, 0, 0, 0.72);
+    color: #ffffff;
+    padding: 6px 12px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.site-image-picker:hover .site-image-change {
+    background: var(--accent);
+}
+
+.site-image-picker input {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.site-image-meta {
+    display: grid;
+    align-content: start;
+    gap: 4px;
+    padding: 14px 16px 16px;
+}
+
+.site-image-meta h3 {
+    margin: 0;
+    font-family: var(--sans);
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.45;
+}
+
+.site-image-usage,
+.site-image-hint {
+    margin: 0;
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.site-image-hint {
+    color: #9a938a;
+    font-size: 12px;
+}
+
+.site-image-foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 8px;
+}
+
+.site-image-badge {
+    border: 1px solid var(--line);
+    padding: 2px 10px;
+    color: var(--muted);
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.site-image-badge.is-custom {
+    border-color: var(--accent);
+    color: var(--accent-deep);
+}
+
+.site-image-badge.is-pending {
+    border-color: var(--accent);
+    background: var(--accent);
+    color: #ffffff;
+}
+
+.site-image-reset {
+    border: 0;
+    background: transparent;
+    padding: 0;
+    color: var(--muted);
+    font: inherit;
+    font-size: 13px;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.site-image-reset:hover {
+    color: var(--accent-deep);
+}
+
+.site-images .editor-bar {
+    margin-top: 28px;
+    border-top: 1px solid var(--line);
+}
+
+.site-image-count {
+    margin-right: auto;
+    color: var(--accent-deep);
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.site-image-count[hidden] {
+    display: none;
+}
+
+@media (max-width: 1100px) {
+    .site-image-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 560px) {
+    .site-image-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
 .gallery-manage,
@@ -3460,4 +3685,159 @@ h2 {
     .portfolio-grid {
         grid-template-columns: 1fr;
     }
+}
+
+/* Motion */
+
+@media (prefers-reduced-motion: no-preference) {
+    @view-transition {
+        navigation: auto;
+    }
+}
+
+.site-header {
+    view-transition-name: site-header;
+    transition: box-shadow 0.3s var(--ease);
+}
+
+.site-header.is-scrolled {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+}
+
+::view-transition-old(root) {
+    animation: page-out 0.22s var(--ease) both;
+}
+
+::view-transition-new(root) {
+    animation: page-in 0.45s var(--ease) both;
+}
+
+@keyframes page-out {
+    to {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+}
+
+@keyframes page-in {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+}
+
+@keyframes rise-in {
+    from {
+        opacity: 0;
+        transform: translateY(24px);
+    }
+
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+@keyframes hero-settle {
+    from {
+        transform: scale(1.08);
+    }
+
+    to {
+        transform: scale(1);
+    }
+}
+
+@keyframes menu-drop {
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+.billboard img,
+.venue-hero img,
+.auth-visual img {
+    animation: hero-settle 1.8s var(--ease) both;
+}
+
+:is(.billboard-copy, .venue-hero-copy, .auth-visual-copy, .page-intro, .auth-card, .product-detail-copy) > *,
+.article > :nth-child(-n+4),
+.product-detail-gallery {
+    animation: rise-in 0.8s var(--ease) both;
+    animation-delay: calc(0.15s + var(--enter-index, 0) * 0.1s);
+}
+
+:is(.billboard-copy, .venue-hero-copy, .auth-visual-copy, .page-intro, .auth-card, .product-detail-copy, .article) > :nth-child(2) {
+    --enter-index: 1;
+}
+
+:is(.billboard-copy, .venue-hero-copy, .auth-visual-copy, .page-intro, .auth-card, .product-detail-copy, .article) > :nth-child(3) {
+    --enter-index: 2;
+}
+
+:is(.billboard-copy, .venue-hero-copy, .auth-visual-copy, .page-intro, .auth-card, .product-detail-copy, .article) > :nth-child(4) {
+    --enter-index: 3;
+}
+
+:is(.billboard-copy, .venue-hero-copy, .auth-visual-copy, .page-intro, .auth-card, .product-detail-copy) > :nth-child(n+5) {
+    --enter-index: 4;
+}
+
+.menu summary span {
+    transition: transform 0.25s var(--ease), opacity 0.2s var(--ease);
+}
+
+.menu[open] summary span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+
+.menu[open] summary span:nth-child(2) {
+    opacity: 0;
+}
+
+.menu[open] summary span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+}
+
+.menu[open] .menu-panel {
+    animation: menu-drop 0.25s var(--ease) both;
+}
+
+.has-motion [data-reveal]:not(.is-revealed) {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: none;
+}
+
+.has-motion [data-reveal].is-revealed {
+    opacity: 1;
+    transform: none;
+    transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
+    transition-delay: calc(var(--reveal-index, 0) * 90ms);
+}
+
+.facility-grid svg {
+    transition: transform 0.3s var(--ease), color 0.3s var(--ease);
+}
+
+.facility-grid article:hover svg {
+    color: var(--accent);
+    transform: translateY(-6px);
+}
+
+.venue-gallery img,
+.portfolio-grid img {
+    transition: transform 0.5s var(--ease), filter 0.5s var(--ease);
+}
+
+.venue-gallery img:hover,
+.portfolio-grid article:hover img {
+    filter: brightness(1.06);
+    transform: scale(1.02);
 }

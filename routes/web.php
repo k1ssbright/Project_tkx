@@ -4,8 +4,10 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\NewsController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProductViewController;
+use App\Http\Controllers\Admin\SiteImageController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CatalogController;
+use App\Models\SiteSetting;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [CatalogController::class, 'home'])->name('home');
@@ -31,4 +33,9 @@ Route::middleware(['auth', 'can:access-admin'])->prefix('admin')->name('admin.')
     Route::get('/views', ProductViewController::class)->name('views');
     Route::resource('products', ProductController::class)->except('show');
     Route::resource('news', NewsController::class)->except('show')->parameters(['news' => 'article']);
+    Route::get('/site-images', [SiteImageController::class, 'edit'])->name('site-images.edit');
+    Route::put('/site-images', [SiteImageController::class, 'update'])->name('site-images.update');
+    Route::delete('/site-images/{image}', [SiteImageController::class, 'destroy'])
+        ->whereIn('image', array_keys(SiteSetting::IMAGES))
+        ->name('site-images.destroy');
 });

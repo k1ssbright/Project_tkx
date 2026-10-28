@@ -12,7 +12,7 @@
     <div class="admin-shell">
         <aside class="admin-sidebar">
             <a class="logo" href="{{ route('admin.dashboard') }}">
-                <img src="{{ asset('images/nanocircuit-logo.png') }}" alt="Nano Circuit">
+                <img src="{{ $siteImages['logo_image'] }}" alt="Nano Circuit">
             </a>
             <p class="admin-label">หลังบ้าน</p>
             <nav class="admin-nav" aria-label="เมนูหลังบ้าน">
@@ -20,6 +20,7 @@
                 <a href="{{ route('admin.views') }}" @class(['is-active' => request()->routeIs('admin.views')])>ยอดคลิกรายสินค้า</a>
                 <a href="{{ route('admin.products.index') }}" @class(['is-active' => request()->routeIs('admin.products.*')])>สินค้า</a>
                 <a href="{{ route('admin.news.index') }}" @class(['is-active' => request()->routeIs('admin.news.*')])>ข่าวสาร</a>
+                <a href="{{ route('admin.site-images.edit') }}" @class(['is-active' => request()->routeIs('admin.site-images.*')])>รูปหน้าเว็บ</a>
             </nav>
             <div class="admin-user">
                 <a href="{{ route('home') }}">ดูหน้าร้าน</a>
