@@ -56,20 +56,20 @@ class ProductViewStatisticsTest extends TestCase
         $expectedTotals = ['1m' => 3, '3m' => 4, '6m' => 8, '12m' => 9];
 
         foreach ($expectedTotals as $period => $total) {
-            $this->get('/admin?period='.$period)
+            $this->get('/admin/views?period='.$period)
                 ->assertOk()
                 ->assertViewHas('totalViews', $total);
         }
 
-        $sixMonths = $this->get('/admin?period=6m')->viewData('products');
+        $sixMonths = $this->get('/admin/views?period=6m')->viewData('products');
         $this->assertSame(5, $sixMonths->firstWhere('id', $tee->id)->views_count);
         $this->assertSame(3, $sixMonths->firstWhere('id', $shirt->id)->views_count);
         $this->assertSame($tee->id, $sixMonths->first()->id);
 
-        $threeMonths = $this->get('/admin?period=3m')->viewData('products');
+        $threeMonths = $this->get('/admin/views?period=3m')->viewData('products');
         $this->assertSame(0, $threeMonths->firstWhere('id', $shirt->id)->views_count);
 
-        $this->get('/admin')->assertOk()->assertViewHas('period', '1m')->assertSee('สถิติการเข้าชมสินค้า');
-        $this->get('/admin?period=forever')->assertSessionHasErrors('period');
+        $this->get('/admin/views')->assertOk()->assertViewHas('period', '1m')->assertSee('สถิติการเข้าชมสินค้า');
+        $this->get('/admin/views?period=forever')->assertSessionHasErrors('period');
     }
 }

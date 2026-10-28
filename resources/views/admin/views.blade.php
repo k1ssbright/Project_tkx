@@ -13,7 +13,7 @@
 
     <div class="period-tabs" role="navigation" aria-label="เลือกช่วงเวลา">
         @foreach ($periods as $key => $option)
-            <a href="{{ route('admin.dashboard', ['period' => $key]) }}" @class(['filter', 'is-active' => $period === $key])>{{ $option['label'] }}</a>
+            <a href="{{ route('admin.views', ['period' => $key]) }}" @class(['filter', 'is-active' => $period === $key])>{{ $option['label'] }}</a>
         @endforeach
     </div>
 

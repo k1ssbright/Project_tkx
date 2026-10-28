@@ -23,6 +23,7 @@ class ProductView extends Model
     {
         return [
             'viewed_at' => 'datetime',
+            'is_sample' => 'boolean',
         ];
     }
 }

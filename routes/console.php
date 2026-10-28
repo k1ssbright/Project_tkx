@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\ProductView;
 use App\Models\User;
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Support\Facades\Artisan;
@@ -23,3 +24,11 @@ Artisan::command('user:make-admin {email} {--revoke : Remove admin access instea
 
     return 0;
 })->purpose('Grant or revoke admin access for a registered user');
+
+Artisan::command('views:clear-samples', function () {
+    $deleted = ProductView::query()->where('is_sample', true)->delete();
+
+    $this->info("ลบคลิกตัวอย่างแล้ว {$deleted} รายการ คลิกจริงยังอยู่ครบ");
+
+    return 0;
+})->purpose('Delete sample product clicks created by ProductViewSampleSeeder');
