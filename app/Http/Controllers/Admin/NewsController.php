@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Article;
 use App\Models\ArticleImage;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
@@ -19,15 +18,7 @@ class NewsController extends Controller
     public function index(): View
     {
         return view('admin.news.index', [
-            'articles' => Article::query()
-                ->withCount([
-                    'images',
-                    'views',
-                    'views as recent_views_count' => fn (Builder $query) => $query->where('viewed_at', '>=', now()->subDays(30)),
-                ])
-                ->latest()
-                ->latest('id')
-                ->get(),
+            'articles' => Article::query()->withCount('images')->latest()->latest('id')->get(),
         ]);
     }
 
