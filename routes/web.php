@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\Admin\ArticleViewController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\NewsController;
 use App\Http\Controllers\Admin\ProductController;
@@ -32,7 +31,6 @@ Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth')->n
 Route::middleware(['auth', 'can:access-admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/', DashboardController::class)->name('dashboard');
     Route::get('/views', ProductViewController::class)->name('views');
-    Route::get('/news-views', ArticleViewController::class)->name('news-views');
     Route::resource('products', ProductController::class)->except('show');
     Route::resource('news', NewsController::class)->except('show')->parameters(['news' => 'article']);
     Route::get('/site-images', [SiteImageController::class, 'edit'])->name('site-images.edit');

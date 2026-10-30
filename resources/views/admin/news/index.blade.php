@@ -9,10 +9,7 @@
             <h1>จัดการข่าวสาร</h1>
             <p class="lede">เพิ่ม แก้ไข หรือลบข่าวสาร ใส่รายละเอียด รูปหน้าปก และรูปเพิ่มเติมได้</p>
         </div>
-        <div class="manage-intro-actions">
-            <a class="arrow-link" href="{{ route('admin.news-views') }}">ดูสถิติการเข้าชม @include('partials.icon-arrow')</a>
-            <a class="text-link" href="{{ route('admin.news.create') }}">เพิ่มข่าวสาร</a>
-        </div>
+        <a class="text-link" href="{{ route('admin.news.create') }}">เพิ่มข่าวสาร</a>
     </section>
 
     @if ($articles->isEmpty())
@@ -25,7 +22,6 @@
                     <div>
                         <h2>{{ $article->title }}</h2>
                         <p>{{ $article->created_at?->locale('th')->translatedFormat('j M Y') }} · รูปเพิ่มเติม {{ $article->images_count }} รูป</p>
-                        <p class="manage-views">เข้าชมทั้งหมด <strong>{{ number_format($article->views_count) }}</strong> ครั้ง · 30 วันล่าสุด {{ number_format($article->recent_views_count) }} ครั้ง</p>
                     </div>
                     <div class="manage-actions">
                         <a href="{{ route('news.show', $article) }}" target="_blank" rel="noopener">ดูหน้าข่าว</a>

@@ -30,12 +30,8 @@ class CatalogController extends Controller
         ]);
     }
 
-    public function article(Request $request, Article $article): View
+    public function article(Article $article): View
     {
-        if (! $request->user()?->is_admin) {
-            $article->views()->create(['viewed_at' => now()]);
-        }
-
         $article->load('images');
 
         return view('news.show', [
