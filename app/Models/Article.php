@@ -14,6 +14,11 @@ class Article extends Model
         return $this->hasMany(ArticleImage::class)->orderBy('sort_order')->orderBy('id');
     }
 
+    public function views(): HasMany
+    {
+        return $this->hasMany(ArticleView::class);
+    }
+
     public function getRouteKeyName(): string
     {
         return 'slug';
