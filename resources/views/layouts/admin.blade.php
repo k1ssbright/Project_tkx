@@ -18,6 +18,7 @@
             <nav class="admin-nav" aria-label="เมนูหลังบ้าน">
                 <a href="{{ route('admin.dashboard') }}" @class(['is-active' => request()->routeIs('admin.dashboard')])>ภาพรวมการเข้าชม</a>
                 <a href="{{ route('admin.views') }}" @class(['is-active' => request()->routeIs('admin.views')])>ยอดคลิกรายสินค้า</a>
+                <a href="{{ route('admin.news-views') }}" @class(['is-active' => request()->routeIs('admin.news-views')])>ยอดเข้าชมข่าวสาร</a>
                 <a href="{{ route('admin.products.index') }}" @class(['is-active' => request()->routeIs('admin.products.*')])>สินค้า</a>
                 <a href="{{ route('admin.news.index') }}" @class(['is-active' => request()->routeIs('admin.news.*')])>ข่าวสาร</a>
                 <a href="{{ route('admin.site-images.edit') }}" @class(['is-active' => request()->routeIs('admin.site-images.*')])>รูปหน้าเว็บ</a>
